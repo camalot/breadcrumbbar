@@ -51,7 +51,7 @@ namespace Vista.Controls {
       Graphics g = e.Graphics;
       if ( this.Parent != null && this.Parent is BreadcrumbBar ) {
         BreadcrumbBar parent = this.Parent as BreadcrumbBar;
-        g.Clear ( parent.IsMouseOver ? parent.HoverBackColor : parent.BackColor );
+				g.Clear ( parent.IsMouseOver ? Color.FromArgb ( parent.BackgroundAlpha, parent.HoverBackColor ) : Color.FromArgb ( parent.BackgroundAlpha, parent.BackColor ) );
         int imgOffset = 3;
         if ( this.Image != null ) {
           DrawImage ( g );

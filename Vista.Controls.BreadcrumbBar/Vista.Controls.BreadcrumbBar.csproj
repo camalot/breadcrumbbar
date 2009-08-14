@@ -64,7 +64,6 @@
     <Compile Include="BreadcrumbBarRootNode.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="BreadcrumbButtonCollectionEditor.cs" />
     <Compile Include="DropDownMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>

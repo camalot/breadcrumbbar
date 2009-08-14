@@ -5,21 +5,20 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace Vista.Controls {
-  public class DropDownMenuItem : ToolStripMenuItem {
-    public DropDownMenuItem ( )
-      : base ( ) {
+	public class DropDownMenuItem : ToolStripMenuItem {
+		public DropDownMenuItem ()
+			: base () {
 
-    }
+		}
 
-    public DropDownMenuItem ( string text, string path )
-      : base ( text ) {
+		public DropDownMenuItem ( string text )
+			: base ( text ) {
 
-    }
-  }
+		}
+	}
 
-  public class DropDownSeparator : DropDownMenuItem {
-    public DropDownSeparator ( )
-      : base ( "-", string.Empty ) {
+  public class DropDownSeparator : ToolStripSeparator {
+    public DropDownSeparator ( ) {
 
     }
   }
@@ -28,14 +27,14 @@ namespace Vista.Controls {
 
     public DropDownMenuItemCollection ( BreadcrumbBarNode owner ) {
       this.Owner = owner;
-      this.Items = new List<DropDownMenuItem> ( );
+			this.Items = new List<ToolStripMenuItem> ();
     }
 
     public BreadcrumbBarNode Owner { get; private set; }
-    private List<DropDownMenuItem> Items { get; set; }
+		private List<ToolStripMenuItem> Items { get; set; }
 
-    public void Add ( DropDownMenuItem value ) {
-      if ( value is DropDownMenuItem ) {
+		public void Add ( ToolStripMenuItem value ) {
+			if ( value is ToolStripMenuItem ) {
         this.Items.Add ( value );
         this.Owner.DropDownMenu.Items.Add ( value );
         if ( this.Items.Count == 1 ) {
@@ -45,13 +44,13 @@ namespace Vista.Controls {
       }
     }
 
-    public void AddRange ( DropDownMenuItem[ ] items ) {
+		public void AddRange ( ToolStripMenuItem[] items ) {
       foreach ( var item in this.Items ) {
         this.Add ( item );
       }
     }
 
-    public DropDownMenuItem this[ int index ] {
+		public ToolStripMenuItem this[ int index ] {
       get {
         return this.Items[ index ];
       }
