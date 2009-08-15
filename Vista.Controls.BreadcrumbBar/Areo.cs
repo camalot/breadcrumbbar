@@ -203,13 +203,33 @@ namespace Vista.Controls {
 		public static extern void DwmExtendFrameIntoClientArea ( System.IntPtr hWnd, ref MARGINS pMargins );
 
 		public static void ExtendFrameIntoClientArea ( this Form form, Panel glassArea ) {
-			MARGINS marg;
-			marg.Top = glassArea.Height; // extend 20 pixels from the top
-			marg.Left = 0;
-			marg.Right = 0;
-			marg.Bottom = 0;
-			DwmExtendFrameIntoClientArea ( form.Handle, ref marg );
+			if ( IsGlassSupported ) {
+				if ( glassArea.Dock != DockStyle.Top ) {
+					glassArea.Dock = DockStyle.Top;
+					glassArea.SendToBack ();
+				}
+				glassArea.BackColor = Color.Transparent;
+				glassArea.Resize += delegate ( object sender, EventArgs e ) {
+					form.Invalidate ( glassArea.Region, true );
+				};
+
+				form.Paint += delegate ( object sender, PaintEventArgs e ) {
+					using ( SolidBrush blackBrush = new SolidBrush ( Color.Black ) ) {
+						e.Graphics.FillRectangle ( blackBrush, glassArea.ClientRectangle );
+					}
+				};
+
+				MARGINS marg;
+				marg.Top = glassArea.Height;
+				marg.Left = 0;
+				marg.Right = 0;
+				marg.Bottom = 0;
+				DwmExtendFrameIntoClientArea ( form.Handle, ref marg );
+
+				glassArea.SetGlassWindowDragable ();
+			}
 		}
+
 
 		public static bool IsOnGlass ( this Form form, Panel glassArea, int lParam ) {
 			// get screen coordinates
