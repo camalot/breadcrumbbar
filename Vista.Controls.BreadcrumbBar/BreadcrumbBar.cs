@@ -38,7 +38,7 @@ namespace Vista.Controls {
 			this.Root = new BreadcrumbBarRootNode ( this, Properties.Resources.folder );
 			this.Nodes.Add ( this.Root );
 
-			this.TextBox = new TextBox ();
+			this.TextBox = new GlassTextBox ();
 			this.TextBox.Visible = false;
 			this.TextBox.Margin = new Padding ( 2, 5, 5, 2 );
 			this.TextBox.BorderStyle = BorderStyle.None;
@@ -64,10 +64,11 @@ namespace Vista.Controls {
 			this.TextBox.MouseWheel += new MouseEventHandler ( TextBox_MouseWheel );
 
 			this.Controls.Add ( this.TextBox );
+			this.BackgroundAlpha = 255;
 			this.ViewMode = ViewModes.Nodes;
 		}
 
-		internal TextBox TextBox { get; set; }
+		internal GlassTextBox TextBox { get; set; }
 		internal bool IsOverDropArrow { get; set; }
 		internal bool IsOverDeadSpace { get; set; }
 		internal bool IsMouseOver { get; set; }
