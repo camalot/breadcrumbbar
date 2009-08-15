@@ -78,11 +78,11 @@ namespace Vista.Controls {
 		#endregion
 
 		#region Images
-		internal new Image BackgroundImage { get { return Properties.Resources.background; } }
+		internal new Image BackgroundImage { get { return Properties.Resources.background2; } }
 
-		internal Image LeftImage { get { return Properties.Resources.leftbuttons; } }
+		internal Image LeftImage { get { return Properties.Resources.leftbuttons2; } }
 
-		internal Image RightImage { get { return Properties.Resources.rightbuttons; } }
+		internal Image RightImage { get { return Properties.Resources.rightbuttons2; } }
 		#endregion
 
 		#region Background
@@ -383,9 +383,11 @@ namespace Vista.Controls {
 					}
 				}
 			} else {
-				g.DrawImage ( this.BackgroundImage, this.ClientRectangle, this.BackgroundDisabledRectangle, GraphicsUnit.Pixel );
-				g.DrawImage ( this.LeftImage, this.LeftButtonBounds, this.LeftButtonDisabledRectangle, GraphicsUnit.Pixel );
-				g.DrawImage ( this.RightImage, this.RightButtonBounds, this.RightButtonDisabledRectangle, GraphicsUnit.Pixel );
+				using ( SolidBrush brush = new SolidBrush ( Color.FromArgb ( 200, this.BackColor ) ) ) {
+					g.DrawImage ( this.BackgroundImage, this.ClientRectangle, this.BackgroundDisabledRectangle, GraphicsUnit.Pixel );
+					g.DrawImage ( this.LeftImage, this.LeftButtonBounds, this.LeftButtonDisabledRectangle, GraphicsUnit.Pixel );
+					g.DrawImage ( this.RightImage, this.RightButtonBounds, this.RightButtonDisabledRectangle, GraphicsUnit.Pixel );
+				}
 			}
 		}
 

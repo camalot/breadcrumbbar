@@ -67,6 +67,13 @@ namespace Vista.Controls.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap background2 {
+            get {
+                object obj = ResourceManager.GetObject("background2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         public static System.Drawing.Bitmap folder {
             get {
                 object obj = ResourceManager.GetObject("folder", resourceCulture);
@@ -95,6 +102,13 @@ namespace Vista.Controls.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap leftbuttons2 {
+            get {
+                object obj = ResourceManager.GetObject("leftbuttons2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         public static System.Drawing.Bitmap refresh {
             get {
                 object obj = ResourceManager.GetObject("refresh", resourceCulture);
@@ -105,6 +119,13 @@ namespace Vista.Controls.Properties {
         public static System.Drawing.Bitmap rightbuttons {
             get {
                 object obj = ResourceManager.GetObject("rightbuttons", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Bitmap rightbuttons2 {
+            get {
+                object obj = ResourceManager.GetObject("rightbuttons2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

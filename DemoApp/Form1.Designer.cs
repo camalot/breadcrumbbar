@@ -42,7 +42,7 @@
 			this.glassArea.BackColor = System.Drawing.Color.Green;
 			this.glassArea.Controls.Add ( this.breadcrumbBar1 );
 			this.glassArea.Controls.Add ( this.explorerNavigation1 );
-			this.glassArea.Location = new System.Drawing.Point ( 1, 67 );
+			this.glassArea.Location = new System.Drawing.Point ( 1, 160 );
 			this.glassArea.Name = "glassArea";
 			this.glassArea.Size = new System.Drawing.Size ( 836, 42 );
 			this.glassArea.TabIndex = 0;
@@ -62,8 +62,8 @@
 			// 
 			this.panelBottom.Controls.Add ( this.breadcrumbBar2 );
 			this.panelBottom.Controls.Add ( this.explorerNavigation2 );
-			this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.panelBottom.Location = new System.Drawing.Point ( 0, 283 );
+			this.panelBottom.Dock = System.Windows.Forms.DockStyle.Top;
+			this.panelBottom.Location = new System.Drawing.Point ( 0, 37 );
 			this.panelBottom.Name = "panelBottom";
 			this.panelBottom.Size = new System.Drawing.Size ( 836, 39 );
 			this.panelBottom.TabIndex = 5;
