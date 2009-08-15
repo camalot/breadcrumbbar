@@ -87,7 +87,6 @@
 			// 
 			this.explorerNavigation2.BackColor = System.Drawing.Color.Transparent;
 			this.explorerNavigation2.Location = new System.Drawing.Point ( 1, 7 );
-			this.explorerNavigation2.MaximumHistory = 10;
 			this.explorerNavigation2.Name = "explorerNavigation2";
 			this.explorerNavigation2.Size = new System.Drawing.Size ( 74, 29 );
 			this.explorerNavigation2.TabIndex = 1;
@@ -112,7 +111,6 @@
 			// 
 			this.explorerNavigation3.BackColor = System.Drawing.Color.Transparent;
 			this.explorerNavigation3.Location = new System.Drawing.Point ( 1, 4 );
-			this.explorerNavigation3.MaximumHistory = 10;
 			this.explorerNavigation3.Name = "explorerNavigation3";
 			this.explorerNavigation3.Size = new System.Drawing.Size ( 74, 29 );
 			this.explorerNavigation3.TabIndex = 3;
@@ -137,7 +135,6 @@
 			// 
 			this.explorerNavigation1.BackColor = System.Drawing.Color.Transparent;
 			this.explorerNavigation1.Location = new System.Drawing.Point ( 0, 8 );
-			this.explorerNavigation1.MaximumHistory = 10;
 			this.explorerNavigation1.Name = "explorerNavigation1";
 			this.explorerNavigation1.PaintForGlass = true;
 			this.explorerNavigation1.Size = new System.Drawing.Size ( 74, 29 );

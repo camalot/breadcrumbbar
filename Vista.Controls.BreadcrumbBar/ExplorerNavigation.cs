@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 using System.ComponentModel;
+using Vista.Controls.Design;
 
 namespace Vista.Controls {
 	public class ExplorerNavigation : Control {
@@ -16,9 +17,15 @@ namespace Vista.Controls {
 				ControlStyles.StandardClick |
 				ControlStyles.SupportsTransparentBackColor, true );
 			this.BackColor = Color.Transparent;
-			this.MaximumHistory = 10;
 			this.History = new ExplorerNavigationHistory ();
+			this.ToolTip = new ToolTip ();
 			this.HistoryMenu = new ContextMenuStrip ();
+			this.HistoryMenu.AutoSize = true;
+
+
+			if ( !Areo.IsLegacyOS ) {
+				this.HistoryMenu.Renderer = new WindowsVistaRenderer ();
+			}
 
 			this.HistoryIndex = -1;
 			this.ShowClearHistory = true;
@@ -31,7 +38,7 @@ namespace Vista.Controls {
 				BuildContextMenu ();
 			};
 
-			this.HistoryMenu.MinimumSize = new Size ( this.Width, this.HistoryMenu.MinimumSize.Width );
+			//this.HistoryMenu.MinimumSize = new Size ( this.Width, this.HistoryMenu.MinimumSize.Width );
 
 			this.HistoryMenu.Opening += delegate ( object sender, CancelEventArgs e ) {
 				foreach ( ToolStripItem xitem in HistoryMenu.Items ) {
@@ -51,6 +58,7 @@ namespace Vista.Controls {
 				this.IsMenuVisible = true;
 
 			};
+
 
 			this.HistoryMenu.Closing += delegate ( object sender, ToolStripDropDownClosingEventArgs e ) {
 				this.IsMenuVisible = false;
@@ -197,10 +205,10 @@ namespace Vista.Controls {
 		internal new bool Enabled { get { return this.LeftEnabled || this.RightEnabled || this.HasHistory; } }
 		internal bool HasHistory { get { return this.History.Count > 0; } }
 		internal int HistoryIndex { get; set; }
+		internal ToolTip ToolTip { get; set; }
 		#endregion
 
 		#region public properties
-		public int MaximumHistory { get; set; }
 		public ExplorerNavigationHistory History { get; private set; }
 		/// <summary>
 		/// Gets or sets if the background should be painted to support being positioned within the 
@@ -230,7 +238,6 @@ namespace Vista.Controls {
 			if ( base.Dock != DockStyle.None ) {
 				base.Dock = DockStyle.None;
 			}
-			//base.OnDockChanged ( e );
 		}
 
 		protected override void OnResize ( EventArgs e ) {
@@ -241,7 +248,6 @@ namespace Vista.Controls {
 			if ( base.Height != this.Size.Height ) {
 				base.Height = this.Size.Height;
 			}
-			//base.OnResize ( e );
 		}
 
 		protected override void OnEnabledChanged ( EventArgs e ) {
@@ -315,6 +321,19 @@ namespace Vista.Controls {
 					this.LeftButtonBounds ) != Rectangle.Empty && this.LeftEnabled;
 				this.IsMouseOverMenuButton = Rectangle.Intersect ( new Rectangle ( this.PointToClient ( MousePosition ), new Size ( 1, 1 ) ),
 					this.MenuButtonBounds ) != Rectangle.Empty && !this.IsMouseOverRightButton && this.HasHistory;
+
+				if ( this.IsMouseOverRightButton && HistoryIndex - 1 >= 0 ) {
+					ExplorerNavigationHistoryItem item = this.History[ HistoryIndex - 1 ];
+					string caption = string.Format ( System.Globalization.CultureInfo.InvariantCulture, "Forward to {0}", item.Text );
+					this.ToolTip.SetToolTip ( this, caption );
+				} else if ( this.IsMouseOverLeftButton && HistoryIndex + 1 < this.History.Count ) {
+					ExplorerNavigationHistoryItem item = this.History[ HistoryIndex + 1 ];
+					string caption = string.Format ( System.Globalization.CultureInfo.InvariantCulture, "Back to {0}", item.Text );
+					this.ToolTip.SetToolTip ( this, caption );
+				} else {
+					this.ToolTip.SetToolTip ( this, string.Empty );
+				}
+
 				this.Invalidate ();
 			}
 		}
@@ -395,7 +414,15 @@ namespace Vista.Controls {
 
 		#region Public methods
 		public void AddHistory ( ExplorerNavigationHistoryItem item ) {
-			this.History.Add ( item );
+			AddHistory ( item, false );
+		}
+		public void AddHistory ( ExplorerNavigationHistoryItem item, bool navigate ) {
+			if ( navigate ) {
+				this.History.Insert ( 0, item );
+				this.HistoryIndex = 0;
+			} else {
+				this.History.Add ( item );
+			}
 			this.Invalidate ();
 		}
 

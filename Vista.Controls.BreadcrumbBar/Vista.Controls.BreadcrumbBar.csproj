@@ -65,6 +65,9 @@
     <Compile Include="BreadcrumbBarRootNode.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Design\GraphicsTools.cs" />
+    <Compile Include="Design\WindowsVistaColorTable.cs" />
+    <Compile Include="Design\WindowsVistaRenderer.cs" />
     <Compile Include="DropDownMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -120,6 +123,9 @@
     <None Include="Resources\leftbuttons2.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Images\background.pdn" />
+    <None Include="Images\leftbuttons.pdn" />
+    <None Include="Images\rightbuttons.pdn" />
     <None Include="Resources\rightbuttons2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
