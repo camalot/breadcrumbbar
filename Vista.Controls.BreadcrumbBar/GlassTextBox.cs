@@ -9,7 +9,10 @@ namespace Vista.Controls {
 	public class GlassTextBox : TextBox {
 		public GlassTextBox () {
 			IsGlassSupported = Areo.IsGlassSupported;
-			this.SetStyle ( ControlStyles.OptimizedDoubleBuffer | ControlStyles.Selectable | ControlStyles.StandardClick, true );
+			this.SetStyle ( 
+				ControlStyles.OptimizedDoubleBuffer | 
+				ControlStyles.Selectable | 
+				ControlStyles.StandardClick, true );
 			if ( IsGlassSupported ) {
 				//we need to call this on every new thread to initialize the buffered painting
 				Areo.BufferedPaintInit ();

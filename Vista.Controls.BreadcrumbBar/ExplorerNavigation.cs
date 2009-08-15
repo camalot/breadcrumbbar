@@ -19,6 +19,7 @@ namespace Vista.Controls {
 			this.MaximumHistory = 10;
 			this.History = new ExplorerNavigationHistory ();
 			this.HistoryMenu = new ContextMenuStrip ();
+
 			this.HistoryIndex = -1;
 			this.ShowClearHistory = true;
 
@@ -31,10 +32,6 @@ namespace Vista.Controls {
 			};
 
 			this.HistoryMenu.MinimumSize = new Size ( this.Width, this.HistoryMenu.MinimumSize.Width );
-
-			this.AddHistory ( new ExplorerNavigationHistoryItem ( "testing" ) );
-			this.AddHistory ( new ExplorerNavigationHistoryItem ( "testing1" ) );
-			this.AddHistory ( new ExplorerNavigationHistoryItem ( "testing2" ) );
 
 			this.HistoryMenu.Opening += delegate ( object sender, CancelEventArgs e ) {
 				foreach ( ToolStripItem xitem in HistoryMenu.Items ) {

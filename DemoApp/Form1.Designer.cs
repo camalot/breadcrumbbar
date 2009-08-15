@@ -24,11 +24,15 @@
 		/// </summary>
 		private void InitializeComponent () {
 			this.glassArea = new System.Windows.Forms.Panel ();
+			this.grad1 = new System.Windows.Forms.Panel ();
+			this.breadcrumbBar3 = new Vista.Controls.BreadcrumbBar ();
+			this.explorerNavigation3 = new Vista.Controls.ExplorerNavigation ();
 			this.breadcrumbBar2 = new Vista.Controls.BreadcrumbBar ();
 			this.explorerNavigation2 = new Vista.Controls.ExplorerNavigation ();
 			this.breadcrumbBar1 = new Vista.Controls.BreadcrumbBar ();
 			this.explorerNavigation1 = new Vista.Controls.ExplorerNavigation ();
 			this.glassArea.SuspendLayout ();
+			this.grad1.SuspendLayout ();
 			this.SuspendLayout ();
 			// 
 			// glassArea
@@ -41,6 +45,41 @@
 			this.glassArea.Name = "glassArea";
 			this.glassArea.Size = new System.Drawing.Size ( 836, 42 );
 			this.glassArea.TabIndex = 0;
+			// 
+			// grad1
+			// 
+			this.grad1.Controls.Add ( this.breadcrumbBar3 );
+			this.grad1.Controls.Add ( this.explorerNavigation3 );
+			this.grad1.Location = new System.Drawing.Point ( 0, 84 );
+			this.grad1.Name = "grad1";
+			this.grad1.Size = new System.Drawing.Size ( 836, 37 );
+			this.grad1.TabIndex = 3;
+			this.grad1.Paint += new System.Windows.Forms.PaintEventHandler ( this.grad1_Paint );
+			// 
+			// breadcrumbBar3
+			// 
+			this.breadcrumbBar3.Anchor = ( (System.Windows.Forms.AnchorStyles)( ( ( System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left )
+									| System.Windows.Forms.AnchorStyles.Right ) ) );
+			this.breadcrumbBar3.BackColor = System.Drawing.SystemColors.Window;
+			this.breadcrumbBar3.BackgroundAlpha = ( (byte)( 255 ) );
+			this.breadcrumbBar3.ForeColor = System.Drawing.SystemColors.WindowText;
+			this.breadcrumbBar3.HoverBackColor = System.Drawing.SystemColors.Window;
+			this.breadcrumbBar3.Location = new System.Drawing.Point ( 76, 7 );
+			this.breadcrumbBar3.Name = "breadcrumbBar3";
+			this.breadcrumbBar3.PathSeparator = "/";
+			this.breadcrumbBar3.Size = new System.Drawing.Size ( 759, 22 );
+			this.breadcrumbBar3.TabIndex = 4;
+			this.breadcrumbBar3.Text = "breadcrumbBar3";
+			// 
+			// explorerNavigation3
+			// 
+			this.explorerNavigation3.BackColor = System.Drawing.Color.Transparent;
+			this.explorerNavigation3.Location = new System.Drawing.Point ( 1, 4 );
+			this.explorerNavigation3.MaximumHistory = 10;
+			this.explorerNavigation3.Name = "explorerNavigation3";
+			this.explorerNavigation3.Size = new System.Drawing.Size ( 74, 29 );
+			this.explorerNavigation3.TabIndex = 3;
+			this.explorerNavigation3.Text = "explorerNavigation3";
 			// 
 			// breadcrumbBar2
 			// 
@@ -63,7 +102,6 @@
 			this.explorerNavigation2.Location = new System.Drawing.Point ( 0, 47 );
 			this.explorerNavigation2.MaximumHistory = 10;
 			this.explorerNavigation2.Name = "explorerNavigation2";
-			this.explorerNavigation2.ShowClearHistory = true;
 			this.explorerNavigation2.Size = new System.Drawing.Size ( 74, 29 );
 			this.explorerNavigation2.TabIndex = 1;
 			this.explorerNavigation2.Text = "explorerNavigation2";
@@ -90,7 +128,6 @@
 			this.explorerNavigation1.MaximumHistory = 10;
 			this.explorerNavigation1.Name = "explorerNavigation1";
 			this.explorerNavigation1.PaintForGlass = true;
-			this.explorerNavigation1.ShowClearHistory = true;
 			this.explorerNavigation1.Size = new System.Drawing.Size ( 74, 29 );
 			this.explorerNavigation1.TabIndex = 0;
 			this.explorerNavigation1.Text = "explorerNavigation1";
@@ -100,11 +137,13 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF ( 6F, 13F );
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size ( 836, 264 );
+			this.Controls.Add ( this.grad1 );
 			this.Controls.Add ( this.breadcrumbBar2 );
 			this.Controls.Add ( this.explorerNavigation2 );
 			this.Controls.Add ( this.glassArea );
 			this.Name = "Form1";
 			this.glassArea.ResumeLayout ( false );
+			this.grad1.ResumeLayout ( false );
 			this.ResumeLayout ( false );
 
 		}
@@ -116,6 +155,9 @@
 		private Vista.Controls.ExplorerNavigation explorerNavigation1;
 		private Vista.Controls.ExplorerNavigation explorerNavigation2;
 		private Vista.Controls.BreadcrumbBar breadcrumbBar2;
+		private System.Windows.Forms.Panel grad1;
+		private Vista.Controls.BreadcrumbBar breadcrumbBar3;
+		private Vista.Controls.ExplorerNavigation explorerNavigation3;
 	}
 }
 

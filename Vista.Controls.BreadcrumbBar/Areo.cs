@@ -98,8 +98,10 @@ namespace Vista.Controls {
 
 		// consts for wndproc
 		public const int WM_NCHITTEST = 0x84;
+		public const int WM_NCLBUTTONDOWN = 0xA1;
 		public const int HTCLIENT = 1;
 		public const int HTCAPTION = 2;
+
 
 		public const int DTT_COMPOSITED = (int)( 1UL << 13 );
 		public const int DTT_GLOWSIZE = (int)( 1UL << 11 );
@@ -148,12 +150,18 @@ namespace Vista.Controls {
 		[DllImport ( "uxtheme.dll", ExactSpelling = true, SetLastError = true )]
 		public static extern int DrawThemeText ( IntPtr hTheme, IntPtr hdc, int iPartId, int iStateId, string text, int iCharCount, int dwFlags1, int dwFlags2, ref RECT pRect );
 
+		[DllImport ( "uxtheme.dll", CharSet = CharSet.Unicode, ExactSpelling = true )]
+		public static extern int SetWindowTheme ( IntPtr hWnd, string appName, string partList );
+
 		//USER32
 		[DllImport ( "user32.dll" )]
 		public static extern bool InvalidateRect ( IntPtr hWnd, RECT lpRect, bool bErase );
 
 		[DllImport ( "user32.dll", CharSet = CharSet.Auto )]
 		public static extern IntPtr SendMessage ( IntPtr hWnd, int msg, IntPtr wParam, int lParam );
+
+		[DllImportAttribute ( "user32.dll" )]
+		public static extern int SendMessage ( IntPtr hWnd, int Msg, int wParam, int lParam );
 
 		[DllImport ( "user32.dll", ExactSpelling = true, SetLastError = true )]
 		public static extern IntPtr GetDC ( IntPtr hdc );
@@ -163,6 +171,10 @@ namespace Vista.Controls {
 
 		[DllImport ( "user32.dll", ExactSpelling = true, SetLastError = true )]
 		public static extern int ReleaseDC ( IntPtr hdc, int state );
+
+
+		[DllImportAttribute ( "user32.dll" )]
+		public static extern bool ReleaseCapture ();
 
 		//GDI
 		[DllImport ( "gdi32.dll", ExactSpelling = true, SetLastError = true )]
@@ -214,9 +226,15 @@ namespace Vista.Controls {
 			return false;
 		}
 
+		public static bool IsLegacyOS {
+			get {
+				return Environment.OSVersion.Version.Major < 6;
+			}
+		}
+
 		public static bool IsGlassSupported {
 			get {
-				if ( Environment.OSVersion.Version.Major < 6 )
+				if ( IsLegacyOS )
 					return false;
 
 				bool isGlassSupported = false;
@@ -225,6 +243,19 @@ namespace Vista.Controls {
 			}
 		}
 
+		public static void SetGlassWindowDragable ( this Control glassControl ) {
+			Form form = glassControl.FindForm ();
+			if ( form == null ) {
+				return;
+			} else {
+				glassControl.MouseDown += delegate ( object sender, MouseEventArgs e ) {
+					if ( e.Button == MouseButtons.Left ) {
+						ReleaseCapture ();
+						SendMessage ( form.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0 );
+					}
+				};
+			}
+		}
 
 	}
 }
