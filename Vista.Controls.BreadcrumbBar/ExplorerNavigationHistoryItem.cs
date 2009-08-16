@@ -7,13 +7,34 @@ using System.Drawing;
 namespace Vista.Controls {
 	public class ExplorerNavigationHistoryItem : ICloneable {
 		public ExplorerNavigationHistoryItem ()
-			: this ( string.Empty ) {
+			: this ( string.Empty, Guid.NewGuid ().ToString () ) {
 
 		}
 
 		public ExplorerNavigationHistoryItem ( string text )
-			: this ( text, null ) {
+			: this ( text, Guid.NewGuid ().ToString () ) {
 
+		}
+
+		public ExplorerNavigationHistoryItem ( string text, string key )
+			: this ( text, key, null ) {
+
+		}
+
+		public ExplorerNavigationHistoryItem ( string text, string key, EventHandler click )
+			: this ( text, key, null, click, null ) {
+		}
+
+		public ExplorerNavigationHistoryItem ( string text, string key, Image image, EventHandler click )
+			: this ( text, key, image, click, null ) {
+		}
+
+		public ExplorerNavigationHistoryItem ( string text, string key, Image image, EventHandler click, object tag ) {
+			NavigateDelegate = click;
+			this.Text = text;
+			this.Image = image;
+			this.Tag = tag;
+			this.Key = key;
 		}
 
 		public ExplorerNavigationHistoryItem ( string text, EventHandler click )
@@ -24,14 +45,12 @@ namespace Vista.Controls {
 			: this ( text, image, click, null ) {
 		}
 
-		public ExplorerNavigationHistoryItem ( string text, Image image, EventHandler click, object tag ) {
-			NavigateDelegate = click;
-			this.Text = text;
-			this.Image = image;
-			this.Tag = tag;
+		public ExplorerNavigationHistoryItem ( string text, Image image, EventHandler click, object tag ) :
+			this ( text, Guid.NewGuid ().ToString (), image, click, tag ) {
 		}
 
 		public string Text { get; set; }
+		public string Key { get; set; }
 		public EventHandler NavigateDelegate { get; set; }
 		public Image Image { get; set; }
 		public object Tag { get; set; }

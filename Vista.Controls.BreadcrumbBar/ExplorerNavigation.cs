@@ -423,6 +423,14 @@ namespace Vista.Controls {
 			this.Invalidate ();
 		}
 
+		public void HistoryGo ( ExplorerNavigationHistoryItem item ) {
+			NavigateHistory ( item );
+		}
+
+		public void HistoryGo ( int historyIndex ) {
+			NavigateHistory ( historyIndex );
+		}
+
 		public void ClearHistory () {
 			this.History.Clear ();
 			this.HistoryIndex = -1;

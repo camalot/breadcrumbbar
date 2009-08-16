@@ -30,6 +30,17 @@ namespace Vista.Controls {
       return this.Items.IndexOf ( item );
     }
 
+		public int IndexOf ( string key ) {
+			for ( int i = 0; i < this.Items.Count; i++ ) {
+				ExplorerNavigationHistoryItem item = this[ i ];
+				if ( item.Key.CompareTo ( key ) == 0 ) {
+					return i;
+				}
+			}
+			return -1;
+
+		}
+
     public void Insert ( int index, ExplorerNavigationHistoryItem item ) {
       this.Items.Insert ( index, item );
       if ( this.ItemAdded != null ) {
@@ -82,6 +93,10 @@ namespace Vista.Controls {
     public bool Contains ( ExplorerNavigationHistoryItem item ) {
       return this.Items.Contains ( item );
     }
+
+		public bool ContainsKey ( string key ) {
+			return IndexOf ( key ) >= 0;
+		}
 
     public void CopyTo ( ExplorerNavigationHistoryItem[ ] array, int arrayIndex ) {
       this.Items.CopyTo ( array, arrayIndex );
