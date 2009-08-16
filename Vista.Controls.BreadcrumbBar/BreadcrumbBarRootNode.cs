@@ -22,7 +22,7 @@ namespace Vista.Controls {
 
 
 		internal BreadcrumbBarRootNode ( BreadcrumbBar parent, Image image, EventHandler click, object tag )
-			: base ( string.Empty, click, tag ) {
+			: base ( string.Empty, string.Empty, click, tag ) {
       this.Parent = parent;
       this.Image = image;
 			//this.Width = ImageBounds.Width + DropDownBounds.Width + 4;

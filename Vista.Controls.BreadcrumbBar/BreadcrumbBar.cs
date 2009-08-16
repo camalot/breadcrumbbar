@@ -193,7 +193,7 @@ namespace Vista.Controls {
 			get {
 				StringBuilder sb = new StringBuilder ();
 				foreach ( BreadcrumbBarNode item in this.Nodes ) {
-					sb.AppendFormat ( CultureInfo.InvariantCulture, "{0}{1}", item.Text, this.PathSeparator );
+					sb.AppendFormat ( CultureInfo.InvariantCulture, "{0}{1}", item.Value, this.PathSeparator );
 				}
 				return sb.ToString ();
 			}
@@ -204,12 +204,12 @@ namespace Vista.Controls {
 
 		private void SetNodesFromPath ( string value ) {
 			this.Nodes.Clear ();
-			StringBuilder tpath = new StringBuilder();
-			foreach ( string s in value.Split(new string[] { this.PathSeparator },StringSplitOptions.RemoveEmptyEntries) ) {
-				tpath.AppendFormat("{0}{1}",s,this.PathSeparator);
+			StringBuilder tpath = new StringBuilder ();
+			foreach ( string s in value.Split ( new string[] { this.PathSeparator }, StringSplitOptions.RemoveEmptyEntries ) ) {
+				tpath.AppendFormat ( "{0}{1}", s, this.PathSeparator );
 				this.Nodes.Add ( new BreadcrumbBarNode ( s, delegate ( object sender, EventArgs e ) {
 					BreadcrumbBarNode item = sender as BreadcrumbBarNode;
-					OnNodeClicked ( new BreadcrumbBarNodeClickedEventArgs (item) );
+					OnNodeClicked ( new BreadcrumbBarNodeClickedEventArgs ( item ) );
 				}, tpath ) );
 			}
 
@@ -239,7 +239,6 @@ namespace Vista.Controls {
 		}
 
 		protected void OnNavigate ( EventArgs e ) {
-
 			if ( this.Navigate != null ) {
 				this.Navigate ( this, e );
 			}
@@ -273,10 +272,11 @@ namespace Vista.Controls {
 			if ( e.KeyCode == Keys.Escape && this.IsTextBoxVisible ) {
 				this.ViewMode = ViewModes.Nodes;
 			} else if ( ( e.KeyCode == Keys.Enter || e.KeyCode == Keys.Return ) ) {
-				OnNavigate ( EventArgs.Empty );
 				if ( this.IsTextBoxVisible ) {
+					this.FullPath = this.TextBox.Text;
 					this.ViewMode = ViewModes.Nodes;
 				}
+				OnNavigate ( EventArgs.Empty );
 			}
 			base.OnKeyUp ( e );
 		}
@@ -399,7 +399,7 @@ namespace Vista.Controls {
 					g.DrawLine ( p, new Point ( DropArrowBounds.X, DropArrowBounds.Y ), new Point ( DropArrowBounds.X, DropArrowBounds.Height + DropArrowBounds.Y - 1 ) );
 				}
 			} else {
-				using ( Brush brsh = new SolidBrush ( IsMouseOver || this.IsNodeDropVisible ? Color.FromArgb(BackgroundAlpha,HoverBackColor) : Color.FromArgb(BackgroundAlpha,BackColor) ) ) {
+				using ( Brush brsh = new SolidBrush ( IsMouseOver || this.IsNodeDropVisible ? Color.FromArgb ( BackgroundAlpha, HoverBackColor ) : Color.FromArgb ( BackgroundAlpha, BackColor ) ) ) {
 					g.FillRectangle ( brsh, DropArrowBounds );
 				}
 			}
@@ -601,7 +601,7 @@ namespace Vista.Controls {
 						BreadcrumbBarNode v = value as BreadcrumbBarNode;
 						v.Height = this.Owner.Height - 2;
 						v.Width = CalculateNodeWidth ( v );
-						int w = (Owner as BreadcrumbBar).Root.Width + 1;
+						int w = ( Owner as BreadcrumbBar ).Root.Width + 1;
 
 						foreach ( var item in nodes ) {
 							w += item.Width;
@@ -680,12 +680,12 @@ namespace Vista.Controls {
 						//if ( item.Equals ( ( this.Owner as BreadcrumbBar ).Root ) || item is BreadcrumbBarRootNode ) {
 						//	continue;
 						//} else {
-							Owner.Controls.Remove ( item );
-							
+						Owner.Controls.Remove ( item );
+
 						//}
 					}
 					//BreadcrumbBarRootNode root = ( this.Owner as BreadcrumbBar ).Root.Clone () as BreadcrumbBarRootNode;
-					nodes.Clear();
+					nodes.Clear ();
 					//( this.Owner as BreadcrumbBar ).Root = root;
 					//this.nodes.Add ( root );
 				}

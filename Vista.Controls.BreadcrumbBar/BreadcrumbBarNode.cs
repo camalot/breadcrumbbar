@@ -10,34 +10,55 @@ using Vista.Controls.Design;
 
 namespace Vista.Controls {
 
-	public class BreadcrumbBarNode : Control{
+	public class BreadcrumbBarNode : Control {
 		public event CancelEventHandler DropDownMenuOpening;
 		public event EventHandler DropDownMenuOpened;
 		public event ToolStripDropDownClosedEventHandler DropDownMenuClosed;
 		public event ToolStripDropDownClosingEventHandler DropDownMenuClosing;
 
 		public BreadcrumbBarNode ()
-			: this ( string.Empty ) {
+			: this ( string.Empty, string.Empty ) {
 
 		}
 
-		public BreadcrumbBarNode ( string text ) : this(text,null,null){
+		public BreadcrumbBarNode ( string text )
+			: this ( text, text ) {
+
+		}
+
+		public BreadcrumbBarNode ( string text, string value )
+			: this ( text, value, null, null ) {
 
 		}
 
 		public BreadcrumbBarNode ( string text, EventHandler click )
-			: this ( text, click, null ) {
+			: this ( text, text, click, null ) {
+
+		}
+
+		public BreadcrumbBarNode ( string text, string value, EventHandler click )
+			: this ( text, value, click, null ) {
 
 		}
 
 
 		public BreadcrumbBarNode ( string text, object tag )
-			: this ( text, null, tag ) {
+			: this ( text, text, null, tag ) {
 
 		}
 
-		public BreadcrumbBarNode ( string text, EventHandler click, object tag ) {
+		public BreadcrumbBarNode ( string text, string value, object tag )
+			: this ( text, value, null, tag ) {
+
+		}
+
+		public BreadcrumbBarNode ( string text, EventHandler click, object tag ) :
+			this ( text, text, click, tag ) {
+		}
+
+		public BreadcrumbBarNode ( string text, string value, EventHandler click, object tag ) {
 			this.Text = text;
+			this.Value = value;
 			this.DoubleBuffered = true;
 			this.SetStyle ( ControlStyles.OptimizedDoubleBuffer | ControlStyles.StandardClick | ControlStyles.SupportsTransparentBackColor, true );
 			this.HasChildNodes = true;
@@ -78,6 +99,7 @@ namespace Vista.Controls {
 				return new Rectangle ( new Point ( 0, 0 ), new Size ( this.Bounds.Width - DropDownSize.Width, this.Bounds.Height ) );
 			}
 		}
+		public string Value { get; set; }
 
 		internal ContextMenuStrip DropDownMenu { get; private set; }
 		internal BreadcrumbDropDownItems DropDownMenuItems { get; private set; }

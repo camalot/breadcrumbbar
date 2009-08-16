@@ -73,9 +73,9 @@ namespace Vista.Controls {
 
 		#region internal properties
 		#region Sizes
-		public new Size Size { get { return new Size ( 74, 29 ); } }
-		public new int Width { get { return this.Size.Width; } }
-		public new int Height { get { return this.Size.Height; } }
+		public new Size Size { get { return new Size ( 74, 29 ); } set { return; } }
+		public new int Width { get { return this.Size.Width; } set { return; } }
+		public new int Height { get { return this.Size.Height; } set { return; } }
 		internal Size ButtonSize { get { return new Size ( 25, 25 ); } }
 
 		internal Size MenuButtonSize { get { return new Size ( 22, 21 ); } }
