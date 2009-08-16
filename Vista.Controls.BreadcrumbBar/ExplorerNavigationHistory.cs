@@ -96,10 +96,11 @@ namespace Vista.Controls {
     }
 
     public bool Remove ( ExplorerNavigationHistoryItem item ) {
-      return this.Items.Remove ( item );
+      bool result = this.Items.Remove ( item );
       if ( this.ItemRemoved != null ) {
         this.ItemRemoved ( this, EventArgs.Empty );
       }
+			return result;
     }
 
     #endregion

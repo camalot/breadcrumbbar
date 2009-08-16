@@ -21,7 +21,7 @@ namespace Vista.Controls {
 			this.ToolTip = new ToolTip ();
 			this.HistoryMenu = new ContextMenuStrip ();
 			this.HistoryMenu.AutoSize = true;
-
+			base.Size = this.Size;
 
 			if ( !Areo.IsLegacyOS ) {
 				this.HistoryMenu.Renderer = new WindowsVistaRenderer ();
@@ -73,12 +73,9 @@ namespace Vista.Controls {
 
 		#region internal properties
 		#region Sizes
-		internal new Size Size { get { return new Size ( 74, 29 ); } }
-
-		internal new int Width { get { return this.Size.Width; } }
-
-		internal new int Height { get { return this.Size.Height; } }
-
+		public new Size Size { get { return new Size ( 74, 29 ); } }
+		public new int Width { get { return this.Size.Width; } }
+		public new int Height { get { return this.Size.Height; } }
 		internal Size ButtonSize { get { return new Size ( 25, 25 ); } }
 
 		internal Size MenuButtonSize { get { return new Size ( 22, 21 ); } }

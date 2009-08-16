@@ -7,23 +7,48 @@ using System.Windows.Forms;
 
 namespace Vista.Controls {
   public class BreadcrumbBarRootNode : BreadcrumbBarNode {
+		private Image _image;
+
     internal BreadcrumbBarRootNode ( BreadcrumbBar parent, Image image )
-      : base ( string.Empty ) {
-      this.Parent = parent;
-      this.Image = image;
+			: this ( parent, image, null,null ) {
     }
 
-    public Image Image { get; set; }
+
+		internal BreadcrumbBarRootNode ( BreadcrumbBar parent, Image image, EventHandler click )
+			: this ( parent, image, click, null ) {
+
+		}
+
+
+
+		internal BreadcrumbBarRootNode ( BreadcrumbBar parent, Image image, EventHandler click, object tag )
+			: base ( string.Empty, click, tag ) {
+      this.Parent = parent;
+      this.Image = image;
+			//this.Width = ImageBounds.Width + DropDownBounds.Width + 4;
+		}
+
+    public Image Image {
+			get {
+				return this._image;
+			}
+			set {
+				this._image = value;
+				this.Width = ImageBounds.Width + DropDownBounds.Width + 4;
+				( this.Parent as BreadcrumbBar ).Nodes.ResizeNodes ();
+				this.Invalidate ();
+			}
+		}
 
     public Rectangle ImageBounds {
       get {
-        return new Rectangle ( 2, 2, this.Image.Width, this.Bounds.Height );
+				return new Rectangle ( 2, 2, this.Image != null ? this.Image.Width : 20, this.Bounds.Height );
       }
     }
 
     public override Rectangle DropDownBounds {
       get {
-        return new Rectangle ( new Point ( ImageBounds.X + this.Image.Width + 2, 0 ), new Size ( DropDownSize.Width, this.Bounds.Height ) );
+				return new Rectangle ( new Point ( ImageBounds.X + ImageBounds.Width + 2, 0 ), new Size ( DropDownSize.Width, this.Bounds.Height ) );
       }
     }
 

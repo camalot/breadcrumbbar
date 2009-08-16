@@ -6,31 +6,67 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.ComponentModel;
+using Vista.Controls.Design;
 
 namespace Vista.Controls {
 
-	public class BreadcrumbBarNode : Control {
+	public class BreadcrumbBarNode : Control{
+		public event CancelEventHandler DropDownMenuOpening;
+		public event EventHandler DropDownMenuOpened;
+		public event ToolStripDropDownClosedEventHandler DropDownMenuClosed;
+		public event ToolStripDropDownClosingEventHandler DropDownMenuClosing;
+
 		public BreadcrumbBarNode ()
 			: this ( string.Empty ) {
 
 		}
 
-		public BreadcrumbBarNode ( string text ) {
+		public BreadcrumbBarNode ( string text ) : this(text,null,null){
+
+		}
+
+		public BreadcrumbBarNode ( string text, EventHandler click )
+			: this ( text, click, null ) {
+
+		}
+
+
+		public BreadcrumbBarNode ( string text, object tag )
+			: this ( text, null, tag ) {
+
+		}
+
+		public BreadcrumbBarNode ( string text, EventHandler click, object tag ) {
 			this.Text = text;
 			this.DoubleBuffered = true;
 			this.SetStyle ( ControlStyles.OptimizedDoubleBuffer | ControlStyles.StandardClick | ControlStyles.SupportsTransparentBackColor, true );
-
+			this.HasChildNodes = true;
 			this.DropDownMenu = new ContextMenuStrip ();
-
-			this.DropDownMenuItems = new DropDownMenuItemCollection ( this );
+			if ( !Areo.IsLegacyOS ) {
+				this.DropDownMenu.Renderer = new WindowsVistaRenderer ();
+			}
+			this.DropDownMenuItems = new BreadcrumbDropDownItems ();
+			this.DropDownMenuItems.ItemAdded += new EventHandler ( DropDownMenuItems_ItemAdded );
+			this.DropDownMenuItems.ItemRemoved += new EventHandler ( DropDownMenuItems_ItemRemoved );
 			this.DropDownMenu.Opening += new CancelEventHandler ( DropDownMenu_Opening );
 			this.DropDownMenu.Opened += new EventHandler ( DropDownMenu_Opened );
 			this.DropDownMenu.Closed += new ToolStripDropDownClosedEventHandler ( DropDownMenu_Closed );
 			this.DropDownMenu.Closing += new ToolStripDropDownClosingEventHandler ( DropDownMenu_Closing );
 
 			this.DropDownMenu.MaximumSize = new Size ( this.DropDownMenu.MaximumSize.Width, 450 );
+			this.NavigateDelegate = click;
+			this.Tag = tag;
 		}
 
+		public void AddDropDownItem ( BreadcrumbDropDownItem item ) {
+			this.DropDownMenuItems.Add ( item );
+			if ( !this.HasChildNodes ) {
+				this.HasChildNodes = true;
+			}
+		}
+
+		public EventHandler NavigateDelegate { get; set; }
+		public object Tag { get; set; }
 		public Size DropDownSize { get { return new Size ( this.HasChildNodes ? 16 : 0, this.HasChildNodes ? this.Bounds.Height : 0 ); } }
 		public virtual Rectangle DropDownBounds {
 			get {
@@ -44,15 +80,21 @@ namespace Vista.Controls {
 		}
 
 		internal ContextMenuStrip DropDownMenu { get; private set; }
-		public DropDownMenuItemCollection DropDownMenuItems { get; private set; }
+		internal BreadcrumbDropDownItems DropDownMenuItems { get; private set; }
 
-		public bool HasChildNodes { get { return this.DropDownMenu.Items.Count > 0; } }
+		public bool HasChildNodes { get; /* { return this.DropDownMenu.Items.Count > 0; }*/ set; }
 
 		internal bool IsMouseOver { get; set; }
 		internal bool IsMouseDown { get; set; }
 		internal bool IsMouseOverDropDown { get; set; }
 		internal bool IsMouseOverText { get; set; }
 		internal bool IsDropDownVisible { get { return this.DropDownMenu.Visible; } }
+
+		protected override void OnClick ( EventArgs e ) {
+			if ( this.IsMouseOverText ) {
+				base.OnClick ( e );
+			}
+		}
 
 		protected override void OnMouseDown ( MouseEventArgs e ) {
 			if ( !this.IsMouseDown ) {
@@ -243,20 +285,52 @@ namespace Vista.Controls {
 
 		#region Dropdown Menu Events
 		void DropDownMenu_Closing ( object sender, ToolStripDropDownClosingEventArgs e ) {
-
+			if ( DropDownMenuClosing != null ) {
+				this.DropDownMenuClosing ( this, e );
+			}
 		}
 
 		void DropDownMenu_Closed ( object sender, ToolStripDropDownClosedEventArgs e ) {
 			this.Parent.Invalidate ();
+			if ( DropDownMenuClosed != null ) {
+				this.DropDownMenuClosed ( this, e );
+			}
 		}
 
 		void DropDownMenu_Opened ( object sender, EventArgs e ) {
-
+			if ( DropDownMenuOpened != null ) {
+				this.DropDownMenuOpened ( this, e );
+			}
 		}
 
 		void DropDownMenu_Opening ( object sender, CancelEventArgs e ) {
+			if ( DropDownMenuOpening != null ) {
+				this.DropDownMenuOpening ( this, e );
+			}
+		}
 
+		void DropDownMenuItems_ItemRemoved ( object sender, EventArgs e ) {
+			BuildDropDownMenu ();
+		}
+
+		void DropDownMenuItems_ItemAdded ( object sender, EventArgs e ) {
+			BuildDropDownMenu ();
+		}
+
+		private void BuildDropDownMenu () {
+			this.DropDownMenu.Items.Clear ();
+			foreach ( BreadcrumbDropDownItem item in this.DropDownMenuItems ) {
+				ToolStripMenuItem tsmi = new ToolStripMenuItem ( item.Text, item.Image, delegate ( object s, EventArgs e1 ) {
+					ToolStripMenuItem i = s as ToolStripMenuItem;
+					BreadcrumbDropDownItem bddi = i.Tag as BreadcrumbDropDownItem;
+					if ( bddi.NavigateDelegate != null ) {
+						bddi.NavigateDelegate.Invoke ( bddi, EventArgs.Empty );
+					}
+				}, item.Text );
+				tsmi.Tag = item.Tag;
+			}
 		}
 		#endregion
+
 	}
 }

@@ -62,13 +62,16 @@
     <Compile Include="BreadcrumbBarNode.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="BreadcrumbBarNodeClickedEventArgs.cs" />
     <Compile Include="BreadcrumbBarRootNode.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="BreadcrumbDropDownItem.cs" />
+    <Compile Include="BreadcrumbDropDownItems.cs" />
     <Compile Include="Design\GraphicsTools.cs" />
     <Compile Include="Design\WindowsVistaColorTable.cs" />
     <Compile Include="Design\WindowsVistaRenderer.cs" />
-    <Compile Include="DropDownMenuItem.cs">
+    <Compile Include="ExplorerAddressNavigation.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ExplorerNavigation.cs">

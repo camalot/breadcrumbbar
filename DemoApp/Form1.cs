@@ -14,19 +14,6 @@ namespace DemoApp {
 		public Form1 () {
 			InitializeComponent ();
 
-			this.ExtendFrameIntoClientArea ( glassArea );
-
-			BreadcrumbBarButton reload = new BreadcrumbBarButton();
-			reload.Image = Vista.Controls.Properties.Resources.refresh;
-			this.breadcrumbBar1.Buttons.Add ( reload );
-
-			reload = new BreadcrumbBarButton ();
-			reload.Image = Vista.Controls.Properties.Resources.refresh;
-			this.breadcrumbBar2.Buttons.Add ( reload );
-
-			reload = new BreadcrumbBarButton ();
-			reload.Image = Vista.Controls.Properties.Resources.refresh;
-			this.breadcrumbBar3.Buttons.Add ( reload );
 		}
 
 
@@ -34,10 +21,9 @@ namespace DemoApp {
 			base.OnPaint ( e );
 		}
 
-		private void grad1_Paint ( object sender, PaintEventArgs e ) {
-			using ( LinearGradientBrush brush = new LinearGradientBrush ( grad1.ClientRectangle, Color.Crimson, Color.Azure, LinearGradientMode.Vertical ) ) {
-				e.Graphics.FillRectangle ( brush, grad1.ClientRectangle );
-			}
+		private void button1_Click ( object sender, EventArgs e ) {
+			this.explorerAddressNavigation1.Address.FullPath = textBox1.Text;
 		}
+
 	}
 }

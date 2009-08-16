@@ -202,7 +202,7 @@ namespace Vista.Controls {
 		[DllImport ( "dwmapi.dll" )]
 		public static extern void DwmExtendFrameIntoClientArea ( System.IntPtr hWnd, ref MARGINS pMargins );
 
-		public static void ExtendFrameIntoClientArea ( this Form form, Panel glassArea ) {
+		public static void ExtendFrameIntoClientArea ( this Form form, Control glassArea ) {
 			if ( IsGlassSupported ) {
 				if ( glassArea.Dock != DockStyle.Top ) {
 					glassArea.Dock = DockStyle.Top;
