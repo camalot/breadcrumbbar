@@ -8,6 +8,7 @@ using System.ComponentModel;
 using Vista.Controls.Design;
 
 namespace Vista.Controls {
+	[ToolboxBitmap(typeof(ExplorerNavigation),"explorernavigation.bmp")]
 	public class ExplorerNavigation : Control {
 		private bool _showClearHistory;
 
