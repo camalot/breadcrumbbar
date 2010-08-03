@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vista.Controls.BreadcrumbBar", "Vista.Controls.BreadcrumbBar\Vista.Controls.BreadcrumbBar.csproj", "{95BC6698-E149-4388-B077-BEDB7453046B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApp", "DemoApp\DemoApp.csproj", "{87D38BB8-654C-4A06-9ACA-A223691E68C7}"
@@ -9,7 +9,7 @@ Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 3
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs07.codeplex.com/
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs07
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = Vista.Controls.BreadcrumbBar\\Vista.Controls.BreadcrumbBar.csproj
 		SccProjectName1 = Vista.Controls.BreadcrumbBar

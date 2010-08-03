@@ -264,7 +264,7 @@ namespace Vista.Controls {
 		}
 
 		public static void SetGlassWindowDragable ( this Control glassControl ) {
-			Form form = glassControl.FindForm ();
+			/*Form form = glassControl.FindForm ();
 			if ( form == null ) {
 				return;
 			} else {
@@ -274,7 +274,7 @@ namespace Vista.Controls {
 						SendMessage ( form.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0 );
 					}
 				};
-			}
+			}*/
 		}
 
 	}
