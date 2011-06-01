@@ -5,19 +5,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vista.Controls.BreadcrumbBa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApp", "DemoApp\DemoApp.csproj", "{87D38BB8-654C-4A06-9ACA-A223691E68C7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{A877F7BD-72D3-4F7F-A001-C8B156A7FE00}"
+	ProjectSection(SolutionItems) = preProject
+		Build\breadcrumbbar.nuspec = Build\breadcrumbbar.nuspec
+		Build\NuGetPublish.msbuild = Build\NuGetPublish.msbuild
+	EndProjectSection
+EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs07
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Vista.Controls.BreadcrumbBar\\Vista.Controls.BreadcrumbBar.csproj
-		SccProjectName1 = Vista.Controls.BreadcrumbBar
-		SccLocalPath1 = Vista.Controls.BreadcrumbBar
-		SccProjectUniqueName2 = DemoApp\\DemoApp.csproj
-		SccProjectName2 = DemoApp
-		SccLocalPath2 = DemoApp
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

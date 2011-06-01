@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>Vista.Controls.BreadcrumbBar</id>
+    <version>1.0.0.0</version>
+    <authors>Ryan Conrad</authors>
+    <owners>Ryan Conrad</owners>
+		<title>Breadcrumb Bar</title>
+    <description>A windows explorer navigation address bar</description>
+    <projectUrl>http://breadcrumbbar.codeplex.com/</projectUrl>
+    <licenseUrl>http://breadcrumbbar.codeplex.com/license</licenseUrl>
+    <iconUrl>http://download.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=breadcrumbbar&amp;DownloadId=240190</iconUrl>
+    <tags>.net20 .net35 .net40 controls navigation windows7</tags>
+    <language>en-US</language>
+  </metadata>
+</package>
